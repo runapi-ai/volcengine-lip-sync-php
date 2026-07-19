@@ -20,7 +20,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "RunApi\\VolcengineLipSync\\Tests\\": "tests/"
+      "RunApi\\VolcengineLipSync\\Tests\\": "tests/",
+      "RunApi\\Core\\Tests\\": "tests/Support/CoreTests/"
     }
   },
   "extra": {
@@ -46,5 +47,11 @@
     "volcengine",
     "lip-sync",
     "lip-sync-api"
-  ]
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^11.5"
+  },
+  "scripts": {
+    "test": "phpunit -c phpunit.xml.dist"
+  }
 }
