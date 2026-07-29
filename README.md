@@ -10,8 +10,8 @@ errors.
 
 This README is the PHP package guide for the public `volcengine-lip-sync-php` split
 repository. For model details, use https://runapi.ai/models/volcengine-lip-sync; for API
-reference, use https://runapi.ai/docs#volcengine-lip-sync; for SDK docs, use
-https://runapi.ai/docs#sdk-volcengine-lip-sync.
+reference, use https://runapi.ai/docs/api/volcengine-lip-sync/lip-sync-video; for SDK docs, use
+https://runapi.ai/docs/resources/sdks.
 
 ## Install
 
@@ -75,8 +75,8 @@ or your secret manager; never commit API keys or callback secrets.
 ## Links
 
 - Model page: https://runapi.ai/models/volcengine-lip-sync
-- SDK docs: https://runapi.ai/docs#sdk-volcengine-lip-sync
-- Product docs: https://runapi.ai/docs#volcengine-lip-sync
+- SDK docs: https://runapi.ai/docs/resources/sdks
+- Product docs: https://runapi.ai/docs/api/volcengine-lip-sync/lip-sync-video
 - Pricing and rate limits: https://runapi.ai/models/volcengine-lip-sync
 - Full catalog: https://runapi.ai/models
 - GitHub repository: https://github.com/runapi-ai/volcengine-lip-sync-php

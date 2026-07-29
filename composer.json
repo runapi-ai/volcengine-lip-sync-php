@@ -33,7 +33,7 @@
   "homepage": "https://runapi.ai/models/volcengine-lip-sync",
   "support": {
     "source": "https://github.com/runapi-ai/volcengine-lip-sync-php",
-    "docs": "https://runapi.ai/docs#sdk-volcengine-lip-sync",
+    "docs": "https://runapi.ai/docs/resources/sdks",
     "issues": "https://github.com/runapi-ai/volcengine-lip-sync-php/issues"
   },
   "keywords": [
