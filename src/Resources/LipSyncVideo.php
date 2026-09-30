@@ -10,7 +10,6 @@ use RunApi\Core\RequestOptions;
 use RunApi\Core\Resources\TypedConfiguredResource;
 use RunApi\VolcengineLipSync\Models\CompletedVideoTaskResponse;
 use RunApi\VolcengineLipSync\Models\VideoTaskResponse;
-use RunApi\VolcengineLipSync\Types;
 
 /** Lip sync video operations for Volcengine Lip Sync. */
 readonly class LipSyncVideo extends TypedConfiguredResource
@@ -75,10 +74,8 @@ readonly class LipSyncVideo extends TypedConfiguredResource
         return new self(
             $http,
             '/api/v1/volcengine_lip_sync/lip_sync_video',
-            'volcengine-lip-sync/lip-sync-video',
             VideoTaskResponse::class,
             CompletedVideoTaskResponse::class,
-            Types::LIP_SYNC_VIDEO_MODELS,
             'lip-sync-video',
             VideoTaskResponse::class,
             CompletedVideoTaskResponse::class,

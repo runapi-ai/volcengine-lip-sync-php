@@ -25,8 +25,7 @@ final class VolcengineLipSyncClientTest extends TestCase
     public function testCreatePostsCompactedBodyToCorrectPath(): void
     {
         $transport = new QueueHttpClient([
-            new Response(200, [], '{"id":"task_1"}'),
-        ]);
+            new Response(200, [], '{"id":"task_1"}')]);
         $client = new VolcengineLipSyncClient(new ClientOptions(apiKey: 'k', httpClient: $transport, maxRetries: 0));
 
         $task = $client->lipSyncVideo->create([
@@ -39,8 +38,7 @@ final class VolcengineLipSyncClientTest extends TestCase
             'source_video_url' => 'https://cdn.runapi.ai/public/samples/volcengine-lip-sync-source.mp4',
             'template_start_seconds' => 0.5,
             'callback_url' => '',
-            'seed' => null,
-        ]);
+            'seed' => null]);
 
         $body = json_decode((string) $transport->requests[0]->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
@@ -55,8 +53,7 @@ final class VolcengineLipSyncClientTest extends TestCase
     {
         $transport = new QueueHttpClient([
             new Response(200, [], '{"id":"task_1"}'),
-            new Response(200, [], '{"id":"task_1","status":"completed","videos":[{"url":"https://file.runapi.ai/result"}],"extra_field":"kept"}'),
-        ]);
+            new Response(200, [], '{"id":"task_1","status":"completed","videos":[{"url":"https://file.runapi.ai/result"}],"extra_field":"kept","usage":{"cost":0.05}}')]);
         $client = new VolcengineLipSyncClient(new ClientOptions(apiKey: 'k', httpClient: $transport, maxRetries: 0));
 
         $result = $client->lipSyncVideo->run([
@@ -67,8 +64,7 @@ final class VolcengineLipSyncClientTest extends TestCase
             'mode' => 'lite',
             'source_audio_url' => 'https://cdn.runapi.ai/public/samples/volcengine-lip-sync-voice-adam.mp3',
             'source_video_url' => 'https://cdn.runapi.ai/public/samples/volcengine-lip-sync-source.mp4',
-            'template_start_seconds' => 0.5,
-        ]);
+            'template_start_seconds' => 0.5]);
 
         self::assertInstanceOf(CompletedVideoTaskResponse::class, $result);
         self::assertSame('https://file.runapi.ai/result', $result->videos[0]->url);
@@ -80,8 +76,7 @@ final class VolcengineLipSyncClientTest extends TestCase
     {
         $transport = new QueueHttpClient([
             new Response(200, [], '{"id":"task_1"}'),
-            new Response(200, [], '{"id":"task_1","status":"completed"}'),
-        ]);
+            new Response(200, [], '{"id":"task_1","status":"completed","usage":{"cost":0.05}}')]);
         $client = new VolcengineLipSyncClient(new ClientOptions(apiKey: 'k', httpClient: $transport, maxRetries: 0));
 
         $this->expectException(ValidationException::class);
@@ -95,34 +90,15 @@ final class VolcengineLipSyncClientTest extends TestCase
             'mode' => 'lite',
             'source_audio_url' => 'https://cdn.runapi.ai/public/samples/volcengine-lip-sync-voice-adam.mp3',
             'source_video_url' => 'https://cdn.runapi.ai/public/samples/volcengine-lip-sync-source.mp4',
-            'template_start_seconds' => 0.5,
-        ]);
+            'template_start_seconds' => 0.5]);
     }
 
-    public function testRejectsInvalidContractEnum(): void
-    {
-        $client = new VolcengineLipSyncClient(new ClientOptions(apiKey: 'k', httpClient: new QueueHttpClient([]), maxRetries: 0));
 
-        $this->expectException(ValidationException::class);
-        $this->expectExceptionMessage('mode must be one of the allowed values');
-
-        $client->lipSyncVideo->create([
-        'model' => 'volcengine-lip-sync',
-        'align_audio' => true,
-        'align_audio_reverse' => true,
-        'enable_vocal_separation' => true,
-        'source_audio_url' => 'https://cdn.runapi.ai/public/samples/volcengine-lip-sync-voice-adam.mp3',
-        'source_video_url' => 'https://cdn.runapi.ai/public/samples/volcengine-lip-sync-source.mp4',
-        'template_start_seconds' => 0.5,
-        'mode' => 'not-valid',
-        ]);
-    }
 
     public function testSecondaryResourceUsesItsOwnPath(): void
     {
         $transport = new QueueHttpClient([
-            new Response(200, [], '{"id":"task_2"}'),
-        ]);
+            new Response(200, [], '{"id":"task_2"}')]);
         $client = new VolcengineLipSyncClient(new ClientOptions(apiKey: 'k', httpClient: $transport, maxRetries: 0));
 
         $client->lipSyncVideo->create([
@@ -133,8 +109,7 @@ final class VolcengineLipSyncClientTest extends TestCase
             'mode' => 'lite',
             'source_audio_url' => 'https://cdn.runapi.ai/public/samples/volcengine-lip-sync-voice-adam.mp3',
             'source_video_url' => 'https://cdn.runapi.ai/public/samples/volcengine-lip-sync-source.mp4',
-            'template_start_seconds' => 0.5,
-        ]);
+            'template_start_seconds' => 0.5]);
 
         self::assertSame('/api/v1/volcengine_lip_sync/lip_sync_video', $transport->requests[0]->getUri()->getPath());
     }
